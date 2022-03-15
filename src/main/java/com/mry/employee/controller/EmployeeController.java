@@ -3,6 +3,8 @@ package com.mry.employee.controller;
 import com.mry.employee.entity.Employee;
 import com.mry.employee.exception.ResourceNotFoundException;
 import com.mry.employee.repository.EmployeeRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +22,8 @@ public class EmployeeController {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    Logger logger = LoggerFactory.getLogger(EmployeeController.class);
+
     @GetMapping("/employees")
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAll();
@@ -30,6 +34,9 @@ public class EmployeeController {
             throws ResourceNotFoundException {
         Employee employee = employeeRepository.findById(employeeId)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + employeeId));
+        logger.info("Employee found for this id :: " + employeeId);
+        logger.debug("Employee found for this id :: " + employeeId);
+        logger.trace("Employee found for this id :: " + employeeId);
         return ResponseEntity.ok().body(employee);
     }
     @PostMapping("/employees")
