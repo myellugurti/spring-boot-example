@@ -1,0 +1,21 @@
+logging:
+  level:
+    com.mry.employee.controller: DEBUG
+    com.mry.employee.service: DEBUG
+    com.mry.employee.repository: DEBUG
+    com.mry.employee.model: DEBUG
+    com.mry.employee.util: DEBUG
+    com.mry.employee.exception: DEBUG
+    com.mry.employee.security: DEBUG
+    com.mry.employee.config: DEBUG
+  pattern: '%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n'
+  file:
+    enabled: true
+    path: logs/application/application.log
+    maxFileSize: 100MB
+    maxHistory: 10
+    compress: true
+    pattern: '%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n'
+  console:
+    enabled: true
+    pattern: '%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n'

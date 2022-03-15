@@ -22,7 +22,6 @@ public class EmployeeController {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    Logger logger = LoggerFactory.getLogger(EmployeeController.class);
 
     @GetMapping("/employees")
     public List<Employee> getAllEmployees() {
@@ -34,9 +33,6 @@ public class EmployeeController {
             throws ResourceNotFoundException {
         Employee employee = employeeRepository.findById(employeeId)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + employeeId));
-        logger.info("Employee found for this id :: " + employeeId);
-        logger.debug("Employee found for this id :: " + employeeId);
-        logger.trace("Employee found for this id :: " + employeeId);
         return ResponseEntity.ok().body(employee);
     }
     @PostMapping("/employees")
@@ -68,6 +64,11 @@ public class EmployeeController {
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return response;
+    }
+
+    @GetMapping("/employees/greet/{name}")
+    public String greeting(@PathVariable(value = "name") String name) {
+        return "Hello " + name + "!";
     }
 }
 
